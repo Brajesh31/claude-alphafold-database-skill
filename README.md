@@ -89,3 +89,49 @@ The repository includes `references/api_reference.md` for retrieval patterns, me
 ## Important Note
 
 A high-confidence prediction is still a computational model. Use experimental validation and biological context for conclusions that affect research or development decisions.
+
+## Reproducible Structure Analysis
+
+A structure retrieval task should produce more than a coordinate file. Preserve enough context for another researcher to identify the exact protein, retrieve the same model, and understand how confidence was assessed.
+
+### Recommended analysis sequence
+
+1. **Resolve the target.** Confirm the organism, accession, isoform, sequence, and expected protein length before downloading a model.
+2. **Record the model version.** Save the AlphaFold entry identifier, database version, retrieval date, file format, and file checksum.
+3. **Inspect coverage.** Determine whether the target is represented by one structure or multiple fragments. Note missing residues and sequence mismatches.
+4. **Review local confidence.** Inspect the pLDDT distribution across regions. A single mean score can hide low-confidence loops or termini.
+5. **Review relative positioning.** Use PAE when conclusions depend on domain orientation or inter-domain relationships.
+6. **Add biological context.** Consider ligands, cofactors, partner chains, membranes, post-translational modifications, and known experimental structures.
+7. **Separate observation from hypothesis.** State which structural features are supported, which are uncertain, and what additional evidence is needed.
+
+### Supporting resources
+
+| Resource | Purpose |
+|---|---|
+| [Structure analysis plan](resources/structure-analysis-plan-template.md) | Define the scientific question, target, methods, controls, and reproducibility record. |
+| [Confidence interpretation checklist](resources/confidence-interpretation-checklist.md) | Review pLDDT, PAE, coverage, biological context, and downstream limitations. |
+| [Structure review record](resources/structure-review-record-template.md) | Capture model identity, quality findings, and suitability for downstream work. |
+| [API reference](references/api_reference.md) | Detailed retrieval, metadata, file, and bulk-access guidance. |
+
+## Working with Model Confidence
+
+Use confidence information at the scale that matches the question. pLDDT is useful for assessing local residue-level reliability. PAE helps assess uncertainty in relative residue or domain positioning. Neither metric establishes that a predicted conformation represents the active biological state.
+
+For interface, docking, or mechanistic work, check whether the biological system requires components that are absent from the predicted model. A single-chain prediction does not by itself validate a protein-protein interface, ligand pose, oligomer, or functional mechanism.
+
+## Expected Analysis Output
+
+A useful handoff should include:
+
+- Protein identity, accession, organism, and isoform.
+- Structure entry, model version, coordinate format, and retrieval date.
+- Sequence coverage and any fragments or missing regions.
+- pLDDT summary with region-level observations.
+- PAE interpretation where domain relationships matter.
+- Comparison evidence and its limitations.
+- Explicit distinction between supported findings and exploratory hypotheses.
+- Scripts, parameters, and file locations needed to reproduce the analysis.
+
+## Common Failure Checks
+
+Before accepting a result, investigate accession/isoform mismatches, stale local files, truncated downloads, incorrect coordinate format assumptions, and code that averages confidence across unrelated regions. Do not turn a high-confidence predicted fold into an unsupported claim about function or binding.
