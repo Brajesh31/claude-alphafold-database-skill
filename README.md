@@ -1,38 +1,91 @@
-# AlphaFold Database
+# claude-alphafold-database-skill
+
+A Claude Code skill for retrieving and interpreting predicted protein structures from the AlphaFold Database.
 
 ## Overview
 
-This repository contains a Claude skill focused on the AlphaFold Database. It provides structured guidance for working with protein structure predictions and related database resources.
+This skill helps access predicted protein structures, retrieve coordinate files, inspect prediction confidence, and incorporate structural models into computational biology workflows.
 
-## Scope
+Predicted structures can support hypothesis generation and structural analysis, but they are not equivalent to experimentally determined structures.
 
-- Explains the skill's purpose, terminology, and workflow.
-- Supports structured exploration of protein structure information.
-- Organizes research questions and expected outputs.
-- Preserves the original skill resources and reference material.
+## Main Capabilities
 
-## Requirements
+- Search for protein structure predictions using identifiers.
+- Retrieve structure records and metadata.
+- Download PDB or mmCIF coordinate files where available.
+- Inspect confidence measures such as pLDDT.
+- Interpret predicted aligned error (PAE) information where available.
+- Compare predicted structures with experimental structures.
+- Integrate coordinate files into downstream structural workflows.
+- Organize structure retrieval and analysis for reproducibility.
 
-- A Claude-compatible environment with skill support.
-- Basic familiarity with proteins and structural biology.
-- Network access when consulting online database resources.
+## When to Use This Skill
 
-## Getting Started
+Use this skill when:
 
-1. Read `SKILL.md` to understand the workflow and boundaries.
-2. Install the skill in your Claude environment's supported skills directory.
-3. Provide a protein, accession, or research question relevant to the task.
-4. Follow the skill's instructions to gather and interpret information.
-5. Verify important findings against the current database and primary scientific sources.
+- Looking up a predicted structure for a protein.
+- Working with UniProt identifiers or protein accessions.
+- Downloading coordinate files for visualization or analysis.
+- Reviewing confidence information for predicted regions.
+- Preparing structure-based computational workflows.
+- Comparing predicted and experimentally determined structures.
 
-## Interpretation Notes
+## Installation
 
-Predicted structures are computational models, not direct experimental observations. Consider confidence information, biological context, and independent evidence before drawing conclusions.
+```bash
+git clone https://github.com/Brajesh31/claude-alphafold-database-skill.git ~/.claude/skills/alphafold-database
+```
 
-## License
+## Usage
 
-MIT. See [LICENSE](LICENSE).
+Invoke the skill for protein structure retrieval and interpretation:
 
-## Supporting reference
+```text
+/alphafold-database
+```
 
-Added `references/api_reference.md` covering public database access patterns, structure and confidence files, metadata, caching, and reproducibility. Verify endpoint details and file versions against the current official API before production use.
+Provide a protein identifier, organism, sequence, or research question. Include the desired structure format and downstream analysis objective.
+
+## Typical Workflow
+
+1. Identify the protein and confirm its accession.
+2. Retrieve the matching structure record.
+3. Check the protein sequence and isoform context.
+4. Download the coordinate file in the required format.
+5. Inspect confidence metrics and per-region reliability.
+6. Identify missing or low-confidence regions.
+7. Compare against known experimental evidence where available.
+8. Record the retrieval date, identifier, and file version.
+
+## Confidence Interpretation
+
+- pLDDT provides a per-residue estimate of local structure confidence.
+- PAE describes uncertainty in the relative placement of residues or domains.
+- High local confidence does not automatically establish the correctness of domain orientation or biological assembly.
+- Low-confidence regions may be flexible, disordered, or poorly modeled.
+
+Do not interpret a predicted structure as direct experimental proof of a binding interaction, mechanism, or biological state.
+
+## Reference Guide
+
+The repository includes `references/api_reference.md` for retrieval patterns, metadata, structure files, confidence information, caching, and reproducibility considerations.
+
+## Validation Checklist
+
+- Protein identity and isoform are correct.
+- Sequence matches the intended target.
+- Coordinate file format is suitable for downstream tools.
+- Confidence values are interpreted at the appropriate structural scale.
+- Missing residues and uncertain regions are noted.
+- Retrieval details are recorded.
+- Biological conclusions are supported by additional evidence.
+
+## Repository Contents
+
+- `SKILL.md`: Main structure retrieval and analysis instructions.
+- `references/api_reference.md`: API and data-handling guide.
+- `README.md`: Overview and workflow guidance.
+
+## Important Note
+
+A high-confidence prediction is still a computational model. Use experimental validation and biological context for conclusions that affect research or development decisions.
