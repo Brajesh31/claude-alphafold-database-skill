@@ -32,3 +32,7 @@ Predicted structures are computational models, not direct experimental observati
 ## License
 
 MIT. See [LICENSE](LICENSE).
+
+## Supporting reference
+
+Added `references/api_reference.md` covering public database access patterns, structure and confidence files, metadata, caching, and reproducibility. Verify endpoint details and file versions against the current official API before production use.
